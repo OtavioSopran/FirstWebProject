@@ -2,4 +2,172 @@
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 
+/* tirando todas as margens e expassamentos da pagina inteira */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* aqui estou deixando a largura em 100% e altura ajustavel p/ responsividade */
+header{
+    width: 100%;
+    /* esse 100vh eh p/ a altura ficar responsiva (View Height) */
+    height: 100vh;
+    /* esse overflow eh p/ nao criar barra de rolagem para o bg */
+    overflow: hidden;
+    /* esse position:relative eh p/ o position:absolute da div banner funcionar */
+    position: relative;
+}
+
+/* background dentro da div imgWarpper dentro do header */
+.imgWrapper{
+    width: 100%;
+    height: 100%;
+    /* esse overflow eh p/ nao criar barra de rolagem para o bg */
+    overflow: hidden;
+    /* este background color eh para escurecer um pouco o bg */
+    background-color: rgba(0, 0, 0, .8)
+}
+
+/* aqui eu estou modificando somente a img dentro do wrapper p/ ficar responsivo*/
+.imgWrapper img{
+    width: 100%;
+    height: 100%;
+    /* esse object-fit eh p/ a imagem cobrir a div imgWarpper  */
+    object-fit: cover;
+    opacity: 0.8;
+    /* aplicacao do efeito zoom @keyframes zoom */
+    animation: zoom 2.5s;
+}
+
+/* animacao do header dentro da div imgWrapper img */
+/* esta animation da um zoom-out da imagem durante 25s */
+@keyframes zoom{
+    0%{
+       transform: scale(1.3); 
+    }
+    100%{
+        transform: scale(1); 
+     }
+}
+
+/* aqui eh a div banner que contem os dados e botao encima do bg no header */
+.banner{
+    /* esse position eh para posicionar a div banner
+    mas p/ funcionar eh necessario ter tambem o position:relative
+    dentro do header sendo possivel por o div banner em qualquer lugar
+    dentro do header */
+    position: absolute;
+    /* margens em relacao as bordas, superior e lateral esquerda */
+    top: 25%;
+    left: 15%;
+}
+/* aqui estou modificando apenas o h1 da div banner */
+.banner h1{
+    color: white;
+    /* esse tamanho 3rem esta relacionado ao tamanho padrao de 16px,
+    logo 3rm eh (3.5 * 16 = 56px) */
+    font-size: 4.5rem;
+    font-family: "Baloo Da 2", serif;
+    /* font-weight: eh para deixar a font mais fina; */
+    font-weight: 200;
+    /* sombra da font */
+    text-shadow: .2rem .3rem .2px rgba(0, 0, 0, .4);
+    /* expassamento entre linhas do texto */
+    line-height: 3.5rem;
+    margin-bottom: 2rem;
+    /* esta opacity eh para iniciar a animation do transparente p/ o normal */
+    opacity: 0;
+    /* animation com nome, tempo e forwards p/ nao desaparecer o texto no final da animation */
+    animation: moveBanner 1s forwards;
+}
+
+/* aqui estou modificando apenas o paragrafo p da div banner */
+.banner p{
+    font-family: "Josefin Slab", serif;
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: .2rem .2rem rgba(0, 0, 0, .4);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: moveBanner 1.5s forwards;
+}
+
+/* aqui estou modificando apenas o botao dentro da div banner */
+.banner button{
+    font-family: "Muli" serif;
+    color: white;
+    /* uppercase p/ deixar tudo maiusculo */
+    text-transform: uppercase;
+    /* p/ dar espaco entre as letras */
+    letter-spacing: .1rem;
+    /* bg do botao em degrade usando code do site uiGradient */
+    background: #6a3093;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a044ff, #6a3093);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a044ff, #6a3093); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* margens internas do botao (1rem p/ o top e bottom e 3rem p/ laterais) */
+    padding: 1rem 3rem;
+    border: none;
+    /* arredondamento das bordas em px p/ nao mudar raio ao redimencionar */
+    border-radius: 5px;
+    /* mudando o ponteiro do mouse p/ indicar que eh um botao */
+    cursor: pointer;
+    opacity: 0;
+    animation: moveBanner 2s forwards;
+}
+
+/* efeito no botao que pode ser usado de varias formas, como ajustar tempo de transicao do efeito (EXPLORAR ISSO) */
+.banner button:hover{
+    background: #6a3093;  
+    background: -webkit-linear-gradient(to right, #a044ff, #6a3093); 
+    background: linear-gradient(to left, #a044ff, #6a3093);
+}
+
+/* animacao do text e botao dentro da div banner */
+@keyframes moveBanner{
+    0%{
+        transform: translateX(50rem) rotateY(60deg);
+    }
+    100%{
+        transform: translateX(0) rotateY(0);
+        opacity: 1;
+    }
+}
+
+/* animation do imagem lateral */
+@keyframes moveImgLateral{
+    0%{
+        transform: translateY(10rem) rotateY(-30deg);
+    }
+    100%{
+        transform: translateY(0) rotateY(0);
+        opacity: 1;
+    }
+}
+
+/* img lateral direito */
+.imgLateral{
+    width: 90%;
+    height: 90vh;
+    position: absolute;
+    top: 10%;
+    left: 05%;
+    opacity: 0;
+    animation: moveImgLateral 3s forwards; 
+}
+/* img lateral direito */
+.img2{
+    width: 90%;
+    height: 90vh;
+    position: absolute;
+    top: 10%;
+    left: 05%;
+    opacity: 0;
+    animation: moveImgLateral 1s forwards; 
+}
+
+
+
+
+
 
