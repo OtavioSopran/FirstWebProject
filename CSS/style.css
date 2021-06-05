@@ -6,6 +6,105 @@
 *{
     margin: 0;
     padding: 0;
+    /* todos os elementos que tiver lista na pagina nao terao os estilo com pontos a esquerda */
+    list-style: none;
+    /* todos os textos na pagina interia nao terao sublinhados */
+    text-decoration: none;
+}
+
+/* codigo p/ mudar as fontes (linkado com o primeiro @import do CSS) */
+:root{
+    --font-primary: "Baloo Da 2", serif;
+    --font-secundary: "Josefin Slab", serif;
+    --font-action: "Mulish", serif;
+}
+
+/* esta eh a div do menu lateral */
+.hamburguer{
+    /* ao fazer uma div, usar backgroundcolor, width e heigh para visualizar o formato */
+    /* background-color: red; */
+    width: 2rem;
+    height: 2rem;
+    /* position fixed eh p/ permanecer fixo na tela mesmo quando estiver rolando a pagina */
+    position: fixed;
+    /* este z-index eh p/ deixar o elemento a frente de todo o resto */
+    z-index: 100;
+    /* distancias em relacao ao canto superior direito, poisso a primeira linha no codigo eh right */
+    right: 2rem;
+    top: 2rem;
+    /* esse display flex eh para poder mover as lines e por um embaixo da outra usando depois o justify-content: space-evenly;  */
+    display: flex;
+    /* esse flex direction eh p/ indicar o sentido que vai ficar as lines, nesse caso em colunas */
+    flex-direction: column;
+    /* justificar conteudo uniformemente dentro da div hamburguer com expassamento vertical */
+    justify-content: space-evenly;
+    /* estilo do ponteiro do mouse muda pra indicar que eh um link */
+    cursor: pointer;
+}
+
+/* efeito associado ao JS p/ o menu lateral */
+.show-menu .hamburguer{
+    right: 15rem;
+}
+
+/* todo os elementos line terao a largura de 100% em relacao ao elemento pai hamburguer */
+.line{
+     width: 100%;
+     height: .1rem;
+     background-color: white;
+     /* sombra para poder visualizar em bgs claros */
+     box-shadow: .1rem .1rem .1rem #6a3093;
+     /* trasicao do efeito associado ao JS do menu lateral */
+     transition: transform 1.2s;
+}
+
+/* efeito da linha 1 da div hambuerguer (associado ao JS) p/ formar um X */
+.show-menu #line1{
+    transform: rotate(45deg) translate(.3rem, .45rem);
+}
+
+/* efeito da linha 2 da div hambuerguer (associado ao JS) */
+.show-menu #line2{
+    opacity: 0;
+}
+
+/* efeito da linha 3 da div hambuerguer (associado ao JS) p/ formar um X */
+.show-menu #line3{
+    transform: rotate(-45deg) translate(.2rem, -.5rem);
+}
+
+/* esse eh o span dentro da div hamburguer */
+.hamburguer span{
+    position: absolute;
+    left: 3rem;
+    height: 2rem;
+    width: 6rem;
+    /* para poder alinha ao centro com justify-content na horizontal e align-items na vertical */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6a3093;
+    /* cor e familia do texto */
+    color: white;
+    font-family: var(--font-action);
+    /* opacity 0 por padrao p/ associar ao .show-menu .hamburguer:hover logo a baixo */
+    opacity: 0;
+}
+
+/* pseudo elemento p/ o span */
+.hamburguer span::before{
+    content: "";
+    position: absolute;
+    border-right: .5rem solid #6a3093;
+    border-top: .5rem solid transparent;
+    border-left: .5rem solid transparent;
+    border-bottom: .5rem solid transparent;
+    left: -1rem;
+}
+
+/* span de fechar aba lateral so aparece ao clicar no X */
+.show-menu .hamburguer:hover span{
+    opacity: 1;
 }
 
 /* aqui estou deixando a largura em 100% e altura ajustavel p/ responsividade */
@@ -51,6 +150,39 @@ header{
      }
 }
 
+/* img lateral direito */
+.imgLateral{
+    width: 80%;
+    height: 80vh;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    opacity: 0;
+    animation: moveImgLateral 3s forwards;
+}
+
+/* img lateral direito */
+.img2{
+    width: 80%;
+    height: 80vh;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    opacity: 0;
+    animation: moveImgLateral 1s forwards; 
+}
+
+/* animation do imagem lateral */
+@keyframes moveImgLateral{
+    0%{
+        transform: translateY(10rem) rotateY(-30deg) scale(2.3);
+    }
+    100%{
+        transform: translateY(0) rotateY(0) scale(1); 
+        opacity: 1;
+    }
+}
+
 /* aqui eh a div banner que contem os dados e botao encima do bg no header */
 .banner{
     /* esse position eh para posicionar a div banner
@@ -68,7 +200,7 @@ header{
     /* esse tamanho 3rem esta relacionado ao tamanho padrao de 16px,
     logo 3rm eh (3.5 * 16 = 56px) */
     font-size: 4.5rem;
-    font-family: "Baloo Da 2", serif;
+    font-family: var(--font-primary);
     /* font-weight: eh para deixar a font mais fina; */
     font-weight: 200;
     /* sombra da font */
@@ -84,7 +216,7 @@ header{
 
 /* aqui estou modificando apenas o paragrafo p da div banner */
 .banner p{
-    font-family: "Josefin Slab", serif;
+    font-family: var(--font-secundary);
     color: white;
     font-size: 2.5rem;
     text-shadow: .2rem .2rem rgba(0, 0, 0, .4);
@@ -95,16 +227,16 @@ header{
 
 /* aqui estou modificando apenas o botao dentro da div banner */
 .banner button{
-    font-family: "Muli" serif;
+    font-family: var(--font-action);
     color: white;
     /* uppercase p/ deixar tudo maiusculo */
     text-transform: uppercase;
     /* p/ dar espaco entre as letras */
     letter-spacing: .1rem;
     /* bg do botao em degrade usando code do site uiGradient */
-    background: #6a3093;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #a044ff, #6a3093);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #a044ff, #6a3093); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #fc4a1a;
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); 
+    background: linear-gradient(to right, #f7b733, #fc4a1a);
     /* margens internas do botao (1rem p/ o top e bottom e 3rem p/ laterais) */
     padding: 1rem 3rem;
     border: none;
@@ -134,37 +266,85 @@ header{
     }
 }
 
-/* animation do imagem lateral */
-@keyframes moveImgLateral{
-    0%{
-        transform: translateY(10rem) rotateY(-30deg);
-    }
-    100%{
-        transform: translateY(0) rotateY(0);
-        opacity: 1;
-    }
+/* menu lateral que abre ao clicar na div hamburguer, ela esta aqui embaixo para seguir a ordem dos elementos */
+.sidebar{
+    width: 20rem;
+    height: 100vh;
+    background: #fc4a1a; 
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  
+    background: linear-gradient(to right, #f7b733, #fc4a1a);  
+    position: fixed;
+    top: 0;
+    /* esse -20rem eh p/ se ajustar ao efeito de aparecer desaparecer do menu lateral */
+    right: -20rem;
+    /* efeito de transicao da aba lateral */
+    transition: all 1s;
 }
 
-/* img lateral direito */
-.imgLateral{
-    width: 90%;
-    height: 90vh;
-    position: absolute;
-    top: 10%;
-    left: 05%;
-    opacity: 0;
-    animation: moveImgLateral 3s forwards; 
+/* JS event do efeito da aba lateral */
+.show-menu .sidebar{
+    right: 0;
 }
-/* img lateral direito */
-.img2{
-    width: 90%;
-    height: 90vh;
+
+/* div menu eh o texto dentro da div sidebar */
+.menu{
     position: absolute;
-    top: 10%;
-    left: 05%;
-    opacity: 0;
-    animation: moveImgLateral 1s forwards; 
+    top: 20%;
+    left: 15%;
 }
+
+/* textos dentro da div menu */
+.menu-item{
+    margin-bottom: 2.5rem;
+}
+
+/* links dentro da div menu */
+.menu-link{
+    font-family: var(--font-action);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color:white;
+    /* transicao de cores p/ o efeito hover (cor e tempo) */
+    transition: color .5s;
+}
+
+/* efeito hover nos links */
+.menu-link:hover{
+    color: #6a3093;
+}
+/* icons que na verdade sao fonts associadas ao segundo @import do CSS */
+.socialMedia{
+    /* position absolute p/ poder posicionar embaixo usando bottom */
+    position: absolute;
+    bottom: 8rem;
+    /* width de 100% em relacao ao tamanho da div sidebar */
+    width: 100%;
+    /* display flex p/ poder usar o justify-content, expassando os icons */
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.socialMedia i{
+    color: #6a3093;
+    font-size: 2.5rem;
+    transition: color .5s;
+}
+
+.socialMedia i:hover{
+    color: #9b4cd3;
+}
+
+.menuBurguer{
+    position: absolute;
+    top: 2.3rem;
+    right: 5.5rem;
+    z-index: 1;
+    color: white;
+    position: fixed;
+    font-family: var(--font-action);
+}
+
+
 
 
 
