@@ -19,6 +19,10 @@
     --font-action: "Mulish", serif;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 /* esta eh a div do menu lateral */
 .hamburguer{
     /* ao fazer uma div, usar backgroundcolor, width e heigh para visualizar o formato */
@@ -107,6 +111,11 @@
     opacity: 1;
 }
 
+
+
+
+
+
 /* aqui estou deixando a largura em 100% e altura ajustavel p/ responsividade */
 header{
     width: 100%;
@@ -125,7 +134,7 @@ header{
     /* esse overflow eh p/ nao criar barra de rolagem para o bg */
     overflow: hidden;
     /* este background color eh para escurecer um pouco o bg */
-    background-color: rgba(0, 0, 0, .8)
+    background-color: rgba(0, 0, 0, .8);    
 }
 
 /* aqui eu estou modificando somente a img dentro do wrapper p/ ficar responsivo*/
@@ -279,9 +288,10 @@ header{
     right: -20rem;
     /* efeito de transicao da aba lateral */
     transition: all 1s;
+    z-index: 10;
 }
 
-/* JS event do efeito da aba lateral */
+/* JS evento do efeito da aba lateral */
 .show-menu .sidebar{
     right: 0;
 }
@@ -338,14 +348,436 @@ header{
     position: absolute;
     top: 2.3rem;
     right: 5.5rem;
-    z-index: 1;
-    color: white;
+    /* z-index: 1; */
+    color: whitesmoke;
     position: fixed;
     font-family: var(--font-action);
 }
 
+.show-menu .menuBurguer{
+    right: -3rem;
+}
 
+/* 16 colunas por 6 linhas */
+.conhecimentos{
+    display: grid;
+    /* para fazer 16 colunas */
+    grid-template-columns: repeat(16, 1fr);
+    /* para fazer as linhas */
+    grid-template-rows: repeat(6, 6rem);
+    row-gap: .5rem;
+}
 
+/* organizando o contetudo dentro das grides */
+/* HTML */
+.conhecimento:nth-child(1){
+    grid-column: 4 / 7;
+    grid-row: 1 / 3;
+}
+
+/* CSS */
+.conhecimento:nth-child(2){
+    grid-column: 3 / 6;
+    grid-row: 3 / 5;
+}
+
+/* DESIGN */
+.conhecimento:nth-child(3){
+    grid-column: 4 / 7;
+    grid-row: 5 / -1;
+}
+
+/* JAVASCRIPT */
+.conhecimento:nth-child(4){
+    grid-column: 11 / 14;
+    grid-row: 1 / 3;
+}
+
+/* BOOTSTRAP */
+.conhecimento:nth-child(5){
+    grid-column: 12 / 15;
+    grid-row: 3 / 5;
+}
+
+/* GIT e GITHUB */
+.conhecimento:nth-child(6){
+    grid-column: 11 / 14;
+    grid-row: 5 / -1;
+}
+
+/* cor de fundo da <section class="sessao-conhecimentos"> */
+.sessao-conhecimentos{
+    background-color: #f5f5f5;
+}
+
+/* formatacao dos textos da div conhecimentos */
+.sessao-header{
+    /* display flex p/ centralizar com justify-content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* titulo */
+.sessao-header h1{
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    color: #6a3093;
+    border-bottom: solid 3px #6a3093;
+    margin-top: 5rem;
+    margin-bottom: 3.5rem;
+}
+
+/* alinhamento dos icons com o titulo de cada topico */
+.conhecimento-header{
+    display: flex;
+    align-items: center;
+    color: #6a3093;
+}
+
+/* icones dos titulos de cada topico */
+.conhecimento-header i{
+    font-size: 2.5rem;
+}
+
+.conhecimento-header h3{
+    font-family: var(--font-action);
+    font-size: 2rem;
+    padding-left: 1rem;
+}
+
+.conhecimento-text{
+    font-family: var(--font-action);
+    margin-top: 1rem;
+}
+
+/* img de fundo da div conhecimentos */
+.conhecimentos-img-wrapper{
+    grid-column: 7 / 11;
+    grid-row: 2 / 6;
+    width: 100%;
+}
+
+/* ajustand a img p/ ficar no tamanho certo dentro da div warpper */
+.conhecimentos-img-wrapper img{
+    object-fit: cover;
+    width: 100%;
+}
+
+/* SESSAO PROJETOS este eh o background-color */
+.sessao-projetos{
+    background-color: #f5f5f5;
+}
+
+.projetos{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card{
+    width: 18rem;
+    height: 25rem;
+    /* este position relative eh p/ posicionar com position absolute a div card info */
+    position: relative;
+    margin-bottom: 5rem;
+}
+
+.card-img-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #262626;
+    border-radius: .5rem;
+    margin-bottom: 2rem;
+}
+
+.card-img-wrapper img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: .5rem;
+    opacity: .8;
+}
+
+.card:hover .card-img-wrapper img{
+    opacity: .5;
+    transition: opacity 3s;
+}
+
+.card-info{
+    position: absolute;
+    bottom: 0;
+    /* inicialmento esse card info vai ser com opacidade 0 e visibilidade escondida  */
+    opacity: 0;
+    visibility: hidden;
+    padding: 2rem;
+    text-shadow: .3rem .2rem .1rem 0.3rem rgba(0, 0, 0, .6);
+    /* efeito ao aparecer as letras */
+    transition: all .3s;
+}
+
+.card-info h2{
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    font-weight: 500;
+    color: #eee;
+}
+
+.card-info h3{
+    font-family: var(--font-secundary);
+    font-weight: bolder;
+    color: #ff4081;
+    margin-bottom: 1rem;
+}
+
+.card-info p{
+    font-family: var(--font-action);
+    font-size: .9rem;
+    font-weight: 500;
+    color: #eee;
+    margin-bottom: 2rem;
+}
+
+.card-info button{
+    width: 8rem;
+    height: 2.5rem;
+    background: #fc4a1a;
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); 
+    background: linear-gradient(to right, #f7b733, #fc4a1a);
+    font-family: var(--font-action);
+    font-size: 1rem;
+    color: #eee;
+    border: none;
+    border-radius: .5rem;
+}
+/* quando passa o muse sobre o card a visibilidade e opacidade mudam */
+.card:hover .card-info{
+    bottom: 2rem;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* AQUI COMECA A SESSAO DE CONTATO */
+.sessao-contato{
+    width: 100%;
+    height: 100vh;
+    background-color: #272727;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contato-wrapper{
+    width: 60%;
+    height: 30rem;
+    display: flex;
+}
+
+/* arrumar essa questao da imagem */
+/* .contato-left{
+    width: 100%;
+    background: linear-gradient(rgba(15,15,15,0.6),rgba(22,22,22,0.9)), 
+    background: url("/Images/img8.jpg");
+    background-size: cover;
+} */
+
+.contato-right{
+    width: 65%;
+    background-color: #eee;
+    padding: 3rem 10rem 10rem;   
+}
+
+.sessao-contato h1{
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-primary);
+    color: #272727;
+    font-size: 3rem;
+    font-weight: lighter;
+}
+
+.sessao-contato form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group{
+    position: relative;
+}
+
+.field{
+    background: transparent;
+    border: none;
+    width: 20rem;
+    font-size: 1.5rem;
+    font-family: var(--font-secundary);
+    border-bottom: 2px dashed #636363;
+    height: 1.5rem;
+    outline: none;
+    margin: 2rem 0;
+}
+
+/* afastamento da linha pontilhada do texto mensagem */
+.input-group textarea{
+    padding-top: .5rem;
+    max-width: 20rem;
+    min-width: 20rem;
+    max-height: 20rem;
+}
+
+.field-label{
+    position: absolute;
+    left: 0;
+    top: 2rem;
+    font-size: 1.2rem;
+    font-family: var(--font-secundary);
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.field:focus ~ label{
+    top: 0;
+    font-size: 1rem;
+}
+
+.btn-submit{
+    text-transform: uppercase;
+    width: 20rem;
+    height: 2.5rem;
+    background: #fc4a1a;
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); 
+    background: linear-gradient(to right, #f7b733, #fc4a1a);
+    font-family: var(--font-action);
+    font-size: 1.2rem;
+    color: #eee;
+    border: none;
+    border-radius: .5rem;
+}
+
+.sessao-orcamento{
+    width: 100%;
+    height: 100vh;
+    background-color: #a7a7a7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orcamento-wrapper{
+    width: 60%;
+    height: 80%;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: .5rem .5rem .3rem rgba(0, 0, 0, .2);
+    position: relative;
+}
+
+.sessao-orcamento h1{
+    position: absolute;
+    top: -2.5rem;
+    left: 2rem;
+    background: #6a3093;  
+    background: -webkit-linear-gradient(to right, #a044ff, #6a3093); 
+    background: linear-gradient(to left, #a044ff, #6a3093);
+    padding: 0 3rem;
+    border-radius: .5rem;
+    color: white;
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    font-weight: lighter;
+    box-shadow: .5rem .5rem .3rem rgba(0, 0, 0, .1);
+}
+
+.sessao-orcamento form{
+    margin: 8rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+
+.sessao-orcamento label{
+    font-family: var(--font-secundary);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sessao-orcamento input[type="number"]{
+    font-family: var(--font-secundary);
+    width: 4rem;
+    font-size: 2rem;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+    padding: .3rem;
+}
+
+.btn-orcamento{
+    background: #6a3093;  
+    background: -webkit-linear-gradient(to right, #a044ff, #6a3093); 
+    background: linear-gradient(to left, #a044ff, #6a3093);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    border: none;
+    padding: .5rem;
+    color: white;
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    grid-column: 2;
+    box-shadow: .5rem .5rem .3rem rgba(0, 0, 0, .1);
+}
+
+footer{
+    width: 100%;
+    height: 10rem;
+    background-color: #17181b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-content{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-content p{
+    font-family: var(--font-secundary);
+    color: #a7a7a7;
+    font-size: 1.2rem;
+}
+
+.social-list a{
+    margin: 0 2rem;
+    color: #a7a7a7;
+    font-size: 2rem;
+}
+
+.social-list ul{
+    display: flex;
+}
+
+#link-topo{
+    position: fixed;
+    right:  3rem;
+    bottom: 3rem;
+    width: 2rem;
+    height: 2rem;
+    background: #6a3093;  
+    background: -webkit-linear-gradient(to right, #a044ff, #6a3093); 
+    background: linear-gradient(to left, #a044ff, #6a3093);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 1rem;
+    border: none;
+}
 
 
 
